@@ -96,7 +96,7 @@ def simple_chat(prompt: str, system: str = "", temperature: float = TEMPERATURE)
             resp = llm.invoke(full)
             return resp if isinstance(resp, str) else str(resp)
         else:
-            from langchain.schema import HumanMessage, SystemMessage
+            from langchain_core.documents import HumanMessage, SystemMessage
             msgs = []
             if system:
                 msgs.append(SystemMessage(content=system))
@@ -127,7 +127,7 @@ def stream_chat(prompt: str, system: str = "", temperature: float = TEMPERATURE)
             for chunk in llm.stream(full):
                 yield chunk
         else:
-            from langchain.schema import HumanMessage, SystemMessage
+            from langchain_core.documents import HumanMessage, SystemMessage
             msgs = []
             if system:
                 msgs.append(SystemMessage(content=system))

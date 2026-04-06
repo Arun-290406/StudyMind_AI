@@ -48,7 +48,8 @@ class StudyMindPDF:
         p.set_text_color(*self.WHITE)
         p.set_font("Helvetica", "B", 14)
         p.set_y(6)
-        p.cell(0, 10, "StudyMind AI", ln=False, align="L", x=10)
+        p.set_x(10)                                                     # FIX: was x=10 inside cell()
+        p.cell(0, 10, "StudyMind AI", ln=False, align="L")
         p.set_font("Helvetica", "", 9)
         p.cell(0, 10, f"Generated {datetime.now().strftime('%d %b %Y, %H:%M')}", align="R")
         p.ln(20)
@@ -62,7 +63,8 @@ class StudyMindPDF:
         p.rect(10, p.get_y(), 190, 9, "FD")
         p.set_font("Helvetica", "B", 11)
         p.set_text_color(*self.PURPLE)
-        p.cell(0, 9, f"  {_clean(title)}", ln=True, x=10)
+        p.set_x(10)                                                     # FIX: was x=10 inside cell()
+        p.cell(0, 9, f"  {_clean(title)}", ln=True)
         p.set_text_color(*self.DARK)
         p.ln(3)
 
@@ -81,7 +83,8 @@ class StudyMindPDF:
                 p.multi_cell(190 - indent, 5.5, f"• {line[2:]}")
             elif line.startswith("#"):
                 p.set_font("Helvetica", "B", 11)
-                p.multi_cell(0, 6, line.lstrip("# ").strip(), x=indent)
+                p.set_x(indent)                                         # FIX: was x=indent inside multi_cell()
+                p.multi_cell(0, 6, line.lstrip("# ").strip())
                 p.set_font("Helvetica", "", 10)
             else:
                 p.set_x(indent)
@@ -106,11 +109,13 @@ def export_summary_pdf(
     # Title
     p.set_font("Helvetica", "B", 18)
     p.set_text_color(*StudyMindPDF.PURPLE)
-    p.cell(0, 12, _clean(title), ln=True, x=10)
+    p.set_x(10)                                                         # FIX: was x=10 inside cell()
+    p.cell(0, 12, _clean(title), ln=True)
     p.set_text_color(*StudyMindPDF.GRAY)
     p.set_font("Helvetica", "", 9)
     info = f"Prepared for: {user_name}  |  Sources: {', '.join(source_docs or [])}"
-    p.cell(0, 6, _clean(info), ln=True, x=10)
+    p.set_x(10)                                                         # FIX: was x=10 inside cell()
+    p.cell(0, 6, _clean(info), ln=True)
     p.ln(5)
 
     # TL;DR
@@ -142,10 +147,12 @@ def export_flashcards_pdf(
 
     p.set_font("Helvetica", "B", 18)
     p.set_text_color(*StudyMindPDF.PURPLE)
-    p.cell(0, 12, _clean(subject), ln=True, x=10)
+    p.set_x(10)                                                         # FIX: was x=10 inside cell()
+    p.cell(0, 12, _clean(subject), ln=True)
     p.set_font("Helvetica", "", 9)
     p.set_text_color(*StudyMindPDF.GRAY)
-    p.cell(0, 6, f"Total: {len(flashcards)} cards  |  {user_name}", ln=True, x=10)
+    p.set_x(10)                                                         # FIX: was x=10 inside cell()
+    p.cell(0, 6, f"Total: {len(flashcards)} cards  |  {user_name}", ln=True)
     p.ln(5)
 
     diff_colors = {
@@ -208,16 +215,19 @@ def export_quiz_pdf(
 
     p.set_font("Helvetica", "B", 18)
     p.set_text_color(*StudyMindPDF.PURPLE)
-    p.cell(0, 12, _clean(topic), ln=True, x=10)
+    p.set_x(10)                                                         # FIX: was x=10 inside cell()
+    p.cell(0, 12, _clean(topic), ln=True)
 
     score_col = (16,185,129) if score_pct >= 80 else (245,158,11) if score_pct >= 60 else (239,68,68)
     p.set_font("Helvetica", "B", 28)
     p.set_text_color(*score_col)
-    p.cell(0, 16, f"{score_pct:.0f}%", ln=True, x=10)
+    p.set_x(10)                                                         # FIX: was x=10 inside cell()
+    p.cell(0, 16, f"{score_pct:.0f}%", ln=True)
 
     p.set_font("Helvetica", "", 10)
     p.set_text_color(*StudyMindPDF.GRAY)
-    p.cell(0, 6, f"Student: {user_name}  |  {len(questions)} questions", ln=True, x=10)
+    p.set_x(10)                                                         # FIX: was x=10 inside cell()
+    p.cell(0, 6, f"Student: {user_name}  |  {len(questions)} questions", ln=True)
     p.ln(4)
 
     doc._section_header("Question Review")
