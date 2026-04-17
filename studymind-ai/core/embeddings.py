@@ -56,7 +56,7 @@ def get_embedding_model():
         print(f"[embeddings] Using OpenAI model: {EMBEDDING_MODEL}")
         _embedding_instance = OpenAIEmbeddings(
             model=EMBEDDING_MODEL,
-            openai_api_key=OPENAI_API_KEY,
+            api_key=OPENAI_API_KEY,
         )
     else:
         from langchain_community.embeddings import HuggingFaceEmbeddings
