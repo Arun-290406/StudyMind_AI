@@ -139,4 +139,4 @@ def stream_chat(prompt: str, system: str = "", temperature: float = TEMPERATURE)
 
 
 def count_tokens(text: str) -> int:
-    return len(text) // 4
+    return len(text) 

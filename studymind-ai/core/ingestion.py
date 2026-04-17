@@ -10,7 +10,12 @@ from typing import List, Dict, Optional
 
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 
 from utils.file_handler import extract_text
 

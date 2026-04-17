@@ -20,7 +20,12 @@ from pathlib import Path
 from typing import List, Optional
 
 from langchain_core.documents import Document
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 
 from core.embeddings import (
     get_embedding_model, save_model_meta,
