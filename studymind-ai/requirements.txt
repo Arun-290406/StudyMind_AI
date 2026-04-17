@@ -21,3 +21,4 @@ gTTS==2.5.1
 SpeechRecognition==3.10.4
 fpdf2==2.7.9
 keybert==0.7.0
+mysql-connector-python==8.3.0
